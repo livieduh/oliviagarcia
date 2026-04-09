@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olivia Alejandra Garcia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     DESIGN TOKENS — edit these to change the whole site's look
+     ============================================================ -->
+<style>
+:root {
+  /* --- COLORS --- */
+  --clay:        #4A8C5C;   /* primary accent → forest green */
+  --clay-light:  #D6EDD9;   /* soft green backgrounds */
+  --clay-dark:   #2A6B3C;   /* hover states */
+  --sage:        #C4A832;   /* secondary accent → golden yellow */
+  --sage-light:  #FBF3D0;   /* yellow background tint */
+  --warm-white:  #F4F8F2;   /* page background → soft green-white */
+  --ink:         #1A2E1F;   /* primary text → deep forest */
+  --ink-mid:     #3D5C45;   /* secondary text */
+  --sand:        #C8DDB0;   /* card borders → leafy green */
+  --sand-dark:   #A8C490;   /* stronger borders */
+  --cream:       #EDF5E1;   /* section background tint */
+
+  /* --- TYPOGRAPHY --- */
+  --font-display: 'Playfair Display', Georgia, serif;  /* headings */
+  --font-body:    'DM Sans', system-ui, sans-serif;    /* body text */
+
+  /* --- SPACING --- */
+  --section-pad:  6rem 5vw;   /* section padding */
+  --radius-card:  16px;        /* card corner radius */
+  --radius-pill:  50px;        /* button/tag pill radius */
+}
+
+/* ============================================================
+   BASE RESET
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--warm-white);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250, 247, 242, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--sand);
+  padding: 0 2rem;
+  display: flex; justify-content: space-between; align-items: center;
+  height: 64px;
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.2rem; font-weight: 700; color: var(--clay);
+}
+.nav-links { display: flex; gap: 1.8rem; list-style: none; }
+.nav-links a {
+  font-size: 0.78rem; font-weight: 500; color: var(--ink-mid);
+  text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--clay); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  min-height: 92vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; padding: 4rem 5vw; gap: 4rem;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -10%; right: -5%;
+  width: 55%; height: 120%;
+  background: var(--clay-light);
+  border-radius: 40% 0 0 50%; z-index: 0;
+}
+.hero-text { position: relative; z-index: 1; }
+.hero-eyebrow {
+  font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--clay); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.hero-eyebrow::before {
+  content: ''; display: inline-block;
+  width: 28px; height: 2px;
+  background: var(--clay); border-radius: 2px;
+}
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 700; line-height: 1.08;
+  color: var(--ink); margin-bottom: 1.5rem;
+}
+h1 em { font-style: italic; color: var(--clay); }
+.hero-desc {
+  font-size: 1.05rem; color: var(--ink-mid);
+  max-width: 480px; margin-bottom: 2.5rem; line-height: 1.8;
+}
+.hero-cta-row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+
+.btn-primary {
+  background: var(--clay); color: white; border: none;
+  padding: 0.8rem 2rem; border-radius: var(--radius-pill);
+  font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+  cursor: pointer; transition: background 0.2s, transform 0.15s;
+  text-decoration: none; display: inline-block;
+}
+.btn-primary:hover { background: var(--clay-dark); transform: translateY(-1px); }
+
+.btn-outline {
+  background: transparent; color: var(--clay);
+  border: 1.5px solid var(--clay);
+  padding: 0.8rem 2rem; border-radius: var(--radius-pill);
+  font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
+  text-decoration: none; display: inline-block;
+}
+.btn-outline:hover { background: var(--clay-light); }
+
+.hero-visual {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+}
+.avatar-frame {
+  width: 280px; height: 340px;
+  background: var(--sand);
+  border-radius: 140px 140px 100px 100px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  border: 4px solid white;
+  box-shadow: 0 8px 40px rgba(196, 113, 74, 0.18);
+}
+
+/* --- TO ADD YOUR PHOTO: replace the initials span below with:
+      <img src="your-photo.jpg" alt="Olivia" style="width:100%;height:100%;object-fit:cover;">
+   --- */
+.avatar-initials {
+  font-family: var(--font-display);
+  font-size: 5rem; font-weight: 700;
+  color: var(--clay); opacity: 0.6; user-select: none;
+}
+.avatar-badge {
+  position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%);
+  background: white; border: 1.5px solid var(--sand-dark);
+  border-radius: var(--radius-pill);
+  padding: 0.35rem 1.2rem; font-size: 0.78rem; font-weight: 500;
+  color: var(--clay-dark); white-space: nowrap; letter-spacing: 0.04em;
+}
+.stat-row {
+  display: flex; gap: 1.2rem; margin-top: 1rem;
+  flex-wrap: wrap; justify-content: center;
+}
+.stat-pill {
+  background: white; border: 1px solid var(--sand);
+  border-radius: 12px; padding: 0.9rem 1.1rem;
+  text-align: center; min-width: 85px;
+}
+.stat-pill .num {
+  font-family: var(--font-display);
+  font-size: 1.6rem; font-weight: 700; color: var(--clay);
+  display: block; line-height: 1;
+}
+.stat-pill .lbl {
+  font-size: 0.68rem; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--ink-mid);
+  display: block; margin-top: 4px;
+}
+
+/* ============================================================
+   SHARED SECTION STYLES
+   ============================================================ */
+section { padding: var(--section-pad); }
+.section-label {
+  font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--clay); margin-bottom: 0.6rem;
+}
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 700; line-height: 1.2;
+  color: var(--ink); margin-bottom: 1rem;
+}
+.section-intro {
+  font-size: 1.05rem; color: var(--ink-mid);
+  max-width: 600px; margin-bottom: 3rem; line-height: 1.8;
+}
+.tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.tag {
+  background: var(--sage-light); color: #3A5C3C;
+  border-radius: var(--radius-pill);
+  padding: 0.2rem 0.75rem; font-size: 0.75rem; font-weight: 500;
+}
+.tag.clay-tag { background: var(--clay-light); color: var(--clay-dark); }
+
+/* ============================================================
+   GALLERY SECTION
+   ============================================================ */
+.gallery-section { background: var(--ink); }
+.gallery-section .section-label { color: var(--clay-light); }
+.gallery-section h2 { color: white; }
+.gallery-section .section-intro { color: rgba(255,255,255,0.65); }
+
+.gallery-filter { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.filter-btn {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.7);
+  border-radius: var(--radius-pill);
+  padding: 0.4rem 1.1rem; font-size: 0.8rem; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
+  font-family: var(--font-body);
+}
+.filter-btn:hover, .filter-btn.active {
+  background: var(--clay); border-color: var(--clay); color: white;
+}
+.gallery-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+}
+.gallery-item {
+  border-radius: var(--radius-card); overflow: hidden;
+  position: relative; cursor: pointer; aspect-ratio: 4/3;
+  transition: transform 0.2s; display: flex;
+  align-items: center; justify-content: center;
+}
+.gallery-item:hover { transform: scale(1.02); }
+.gallery-item.wide { grid-column: span 2; }
+.gallery-item.tall { grid-row: span 2; aspect-ratio: unset; }
+
+/* --- TO ADD REAL PHOTOS: replace background color with:
+      background-image: url('your-photo.jpg'); background-size: cover; background-position: center;
+   --- */
+.gallery-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 1.5rem; color: white;
+}
+.gallery-placeholder .icon { font-size: 2rem; margin-bottom: 0.6rem; opacity: 0.6; }
+.gallery-placeholder .caption { font-size: 0.82rem; font-weight: 500; opacity: 0.85; line-height: 1.4; }
+.gallery-placeholder .sub { font-size: 0.72rem; opacity: 0.5; margin-top: 0.3rem; }
+.gallery-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(44,36,22,0.85));
+  padding: 1rem; opacity: 0; transition: opacity 0.2s;
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-overlay p { color: white; font-size: 0.82rem; font-weight: 500; }
+.gallery-tip {
+  color: rgba(255,255,255,0.4); font-size: 0.8rem;
+  margin-top: 1.5rem; font-style: italic;
+}
+
+/* ============================================================
+   SOCIAL MEDIA SECTION
+   ============================================================ */
+.social-section { background: var(--cream); }
+.platform-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem; margin-bottom: 3rem;
+}
+.platform-card {
+  background: white; border: 1px solid var(--sand);
+  border-radius: var(--radius-card); padding: 1.75rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.platform-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(196, 113, 74, 0.12);
+}
+.platform-icon {
+  width: 48px; height: 48px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1rem; font-size: 22px;
+}
+.platform-name { font-weight: 500; font-size: 1rem; color: var(--ink); margin-bottom: 0.3rem; }
+.platform-role { font-size: 0.85rem; color: var(--clay); font-weight: 500; margin-bottom: 0.75rem; }
+.platform-desc { font-size: 0.88rem; color: var(--ink-mid); line-height: 1.65; }
+
+.highlight-banner {
+  background: var(--clay); color: white;
+  border-radius: var(--radius-card); padding: 2rem 2.5rem;
+  display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+}
+.highlight-banner h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem; font-weight: 700; margin-bottom: 0.4rem;
+}
+.highlight-banner p { font-size: 0.9rem; opacity: 0.88; max-width: 500px; line-height: 1.6; }
+.banner-badge {
+  background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4);
+  border-radius: var(--radius-pill); padding: 0.4rem 1rem;
+  font-size: 0.78rem; font-weight: 500; letter-spacing: 0.04em;
+  white-space: nowrap; flex-shrink: 0;
+}
+
+/* ============================================================
+   EXPERIENCE SECTION
+   ============================================================ */
+.exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.exp-timeline { position: relative; padding-left: 2rem; }
+.exp-timeline::before {
+  content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+  width: 2px; background: var(--sand-dark); border-radius: 2px;
+}
+.exp-item { position: relative; margin-bottom: 2.5rem; padding-left: 1.5rem; }
+.exp-item::before {
+  content: ''; position: absolute; left: -2.5rem; top: 8px;
+  width: 10px; height: 10px; background: var(--clay);
+  border-radius: 50%; border: 2px solid var(--warm-white);
+  box-shadow: 0 0 0 2px var(--clay);
+}
+.exp-date { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--clay); font-weight: 500; margin-bottom: 0.25rem; }
+.exp-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.15rem; }
+.exp-org { font-size: 0.9rem; color: var(--sage); font-weight: 500; margin-bottom: 0.6rem; }
+.exp-desc { font-size: 0.88rem; color: var(--ink-mid); line-height: 1.7; }
+
+.admin-box {
+  background: var(--cream); border: 1px solid var(--sand);
+  border-radius: var(--radius-card); padding: 2rem;
+}
+.admin-box .sub {
+  font-size: 0.82rem; color: var(--clay); font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem;
+}
+.admin-box h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem; font-weight: 700; color: var(--ink); margin-bottom: 1.25rem;
+}
+.admin-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+.admin-list li {
+  font-size: 0.88rem; color: var(--ink-mid);
+  display: flex; gap: 0.75rem; align-items: flex-start; line-height: 1.6;
+}
+.admin-list li::before {
+  content: ''; width: 6px; height: 6px; background: var(--clay);
+  border-radius: 50%; flex-shrink: 0; margin-top: 0.5rem;
+}
+
+/* ============================================================
+   TRAVEL SECTION
+   ============================================================ */
+.travel-section { background: var(--cream); }
+.travel-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.travel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-bottom: 2rem; }
+.country-card {
+  background: white; border: 1px solid var(--sand);
+  border-radius: 14px; padding: 1rem 1.2rem; transition: border-color 0.2s;
+}
+.country-card:hover { border-color: var(--clay); }
+.country-flag { font-size: 1.8rem; margin-bottom: 0.3rem; }
+.country-name { font-weight: 500; font-size: 0.92rem; color: var(--ink); }
+.country-note { font-size: 0.78rem; color: var(--ink-mid); margin-top: 0.2rem; }
+.travel-insight {
+  background: var(--sage-light); border-left: 3px solid var(--sage);
+  border-radius: 0 12px 12px 0; padding: 1.25rem 1.5rem;
+  font-size: 0.95rem; color: #2C4A2E; line-height: 1.7; font-style: italic;
+}
+.travel-highlights { display: flex; flex-direction: column; gap: 1rem; }
+.travel-stat {
+  background: white; border: 1px solid var(--sand);
+  border-radius: 12px; padding: 1.2rem 1.5rem;
+  display: flex; gap: 1rem; align-items: center;
+}
+.travel-stat .t-num {
+  font-family: var(--font-display);
+  font-size: 2rem; font-weight: 700; color: var(--clay); min-width: 56px;
+}
+.travel-stat .t-desc { font-size: 0.85rem; color: var(--ink-mid); line-height: 1.5; }
+.travel-stat .t-title { font-weight: 500; font-size: 0.9rem; color: var(--ink); display: block; margin-bottom: 0.2rem; }
+
+/* ============================================================
+   SKILLS SECTION
+   ============================================================ */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+.skill-card {
+  background: white; border: 1px solid var(--sand);
+  border-radius: var(--radius-card); padding: 1.75rem;
+}
+.skill-category {
+  font-size: 0.75rem; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--clay);
+  font-weight: 500; margin-bottom: 0.75rem;
+}
+.skill-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 1rem;
+}
+.skill-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.skill-list li {
+  font-size: 0.87rem; color: var(--ink-mid);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.skill-list li::before {
+  content: ''; width: 5px; height: 5px; background: var(--clay);
+  border-radius: 50%; flex-shrink: 0;
+}
+
+/* ============================================================
+   CONTACT SECTION
+   ============================================================ */
+.contact-section { background: var(--ink); color: white; text-align: center; }
+.contact-section h2 { color: white; }
+.contact-section .section-label { color: var(--clay-light); }
+.contact-section .section-intro { color: rgba(255,255,255,0.72); margin: 0 auto 2.5rem; }
+.contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+.contact-link {
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  color: white; border-radius: var(--radius-pill);
+  padding: 0.75rem 1.75rem; font-size: 0.88rem; font-weight: 500;
+  text-decoration: none; transition: background 0.2s; cursor: pointer;
+}
+.contact-link:hover { background: rgba(255,255,255,0.2); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: var(--ink);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  text-align: center; padding: 1.5rem;
+  font-size: 0.8rem; color: rgba(255,255,255,0.35);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .exp-grid { grid-template-columns: 1fr; }
+  .travel-layout { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-item.wide { grid-column: span 1; }
+}
+@media (max-width: 720px) {
+  .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 2.5rem; }
+  .hero::before { display: none; }
+  .hero-visual { order: -1; }
+  .avatar-frame { width: 200px; height: 240px; }
+  .avatar-initials { font-size: 3.5rem; }
+  nav { padding: 0 1.2rem; }
+  .nav-links { display: none; }
+  section { padding: 4rem 1.5rem; }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-item.wide, .gallery-item.tall { grid-column: span 1; grid-row: span 1; }
+  .travel-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav>
+  <span class="nav-logo">OAG</span>
+  <ul class="nav-links">
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#social">Social</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#travel">Travel</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" style="padding-top: 3rem;">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Social Media & Community Outreach</p>
+    <h1>Olivia<br><em>Alejandra</em><br>Garcia</h1>
+    <p class="hero-desc">
+      Mission-driven communicator creating content that connects communities, elevates voices,
+      and builds awareness across platforms — with roots in international education and a passion
+      for authentic storytelling.
+    </p>
+    <div class="hero-cta-row">
+      <a href="#gallery" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="avatar-frame">
+      <!-- REPLACE THIS WITH YOUR PHOTO:
+           <img src="olivia.jpg" alt="Olivia Alejandra Garcia" style="width:100%;height:100%;object-fit:cover;">
+      -->
+      <span class="avatar-initials">OAG</span>
+      <span class="avatar-badge">UCSB Alumna</span>
+    </div>
+    <div class="stat-row">
+      <div class="stat-pill">
+        <span class="num">2+</span>
+        <span class="lbl">Platforms Managed</span>
+      </div>
+      <div class="stat-pill">
+        <span class="num">10+</span>
+        <span class="lbl">Countries</span>
+      </div>
+      <div class="stat-pill">
+        <span class="num">★</span>
+        <span class="lbl">UCEAP Takeover</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GALLERY
+     ============================================================ -->
+<section id="gallery" class="gallery-section">
+  <p class="section-label">Portfolio & Gallery</p>
+  <h2>My Work in Action</h2>
+  <p class="section-intro">
+    Content I've created, campaigns I've run, and moments I've captured —
+    from community boards to international adventures.
+  </p>
+
+  <div class="gallery-filter">
+    <button class="filter-btn active" onclick="filterGallery('all', this)">All</button>
+    <button class="filter-btn" onclick="filterGallery('social', this)">Social Media</button>
+    <button class="filter-btn" onclick="filterGallery('travel', this)">Travel</button>
+    <button class="filter-btn" onclick="filterGallery('outreach', this)">Outreach</button>
+  </div>
+
+  <div class="gallery-grid" id="galleryGrid">
+
+    <!-- TILE 1 — wide featured tile -->
+    <!-- TO USE YOUR PHOTO: remove the style background-color and add:
+         style="background-image:url('uceap-takeover.jpg');background-size:cover;background-position:center;" -->
+    <div class="gallery-item wide" data-cat="social" style="background:#8B4A2A;">
+      <div class="gallery-placeholder">
+        <div class="icon">📱</div>
+        <div class="caption">UCEAP Instagram Takeover</div>
+        <div class="sub">Replace with your best takeover photo</div>
+      </div>
+      <div class="gallery-overlay"><p>UCEAP Account Takeover — Behind the scenes of studying abroad</p></div>
+    </div>
+
+    <!-- TILE 2 -->
+    <div class="gallery-item" data-cat="travel" style="background:#6B8C6E;">
+      <div class="gallery-placeholder">
+        <div class="icon">🌍</div>
+        <div class="caption">International Adventures</div>
+        <div class="sub">Replace with a favorite travel photo</div>
+      </div>
+      <div class="gallery-overlay"><p>Life abroad — cross-cultural experiences</p></div>
+    </div>
+
+    <!-- TILE 3 -->
+    <div class="gallery-item" data-cat="social" style="background:#C4714A;">
+      <div class="gallery-placeholder">
+        <div class="icon">✏️</div>
+        <div class="caption">Community Affairs Board</div>
+        <div class="sub">Replace with an Instagram post or graphic</div>
+      </div>
+      <div class="gallery-overlay"><p>CAB Instagram — original content & campaigns</p></div>
+    </div>
+
+    <!-- TILE 4 — tall tile -->
+    <div class="gallery-item tall" data-cat="outreach" style="background:#3A5C3C;">
+      <div class="gallery-placeholder">
+        <div class="icon">🤝</div>
+        <div class="caption">Community Outreach</div>
+        <div class="sub">Replace with an event or tabling photo</div>
+      </div>
+      <div class="gallery-overlay"><p>On the ground — community engagement & outreach</p></div>
+    </div>
+
+    <!-- TILE 5 -->
+    <div class="gallery-item" data-cat="travel" style="background:#5A4E3C;">
+      <div class="gallery-placeholder">
+        <div class="icon">✈️</div>
+        <div class="caption">Study Abroad Experience</div>
+        <div class="sub">Replace with a UCEAP program photo</div>
+      </div>
+      <div class="gallery-overlay"><p>UCEAP — living the study abroad life</p></div>
+    </div>
+
+    <!-- TILE 6 -->
+    <div class="gallery-item" data-cat="social" style="background:#884422;">
+      <div class="gallery-placeholder">
+        <div class="icon">🎨</div>
+        <div class="caption">Graphic Design Work</div>
+        <div class="sub">Replace with a Canva post or campaign asset</div>
+      </div>
+      <div class="gallery-overlay"><p>Design work — on-brand graphics for social</p></div>
+    </div>
+
+    <!-- TILE 7 -->
+    <div class="gallery-item" data-cat="outreach" style="background:#4A7A5C;">
+      <div class="gallery-placeholder">
+        <div class="icon">📣</div>
+        <div class="caption">Outreach Campaign</div>
+        <div class="sub">Replace with a flyer, event, or campaign shot</div>
+      </div>
+      <div class="gallery-overlay"><p>Campaign work — reaching audiences that matter</p></div>
+    </div>
+
+    <!-- TILE 8 -->
+    <div class="gallery-item" data-cat="travel" style="background:#7A6040;">
+      <div class="gallery-placeholder">
+        <div class="icon">🗺️</div>
+        <div class="caption">Around the World</div>
+        <div class="sub">Replace with another favorite travel moment</div>
+      </div>
+      <div class="gallery-overlay"><p>Exploring cultures — the lens behind the content</p></div>
+    </div>
+
+  </div>
+  <p class="gallery-tip">💡 To add real photos, open this file in a text editor and follow the comments above each gallery tile.</p>
+</section>
+
+<!-- ============================================================
+     SOCIAL MEDIA
+     ============================================================ -->
+<section id="social" class="social-section">
+  <p class="section-label">Social Media Presence</p>
+  <h2>Platforms & Campaigns</h2>
+  <p class="section-intro">
+    From managing an organization's Instagram to executing an official UCEAP account takeover,
+    I create purposeful, on-brand content tailored to audience and platform.
+  </p>
+
+  <div class="platform-grid">
+    <div class="platform-card">
+      <div class="platform-icon" style="background:linear-gradient(135deg,#f9ce34,#ee2a7b,#6228d7);">📸</div>
+      <p class="platform-name">Instagram</p>
+      <p class="platform-role">Account Manager — Community Affairs Board</p>
+      <p class="platform-desc">
+        Managed end-to-end content creation: writing captions, designing graphics,
+        scheduling posts, and tracking engagement to grow community awareness.
+      </p>
+      <div class="tag-row">
+        <span class="tag">Content Strategy</span>
+        <span class="tag">Graphic Design</span>
+        <span class="tag">Community Building</span>
+      </div>
+    </div>
+
+    <div class="platform-card">
+      <div class="platform-icon" style="background:linear-gradient(135deg,#f9ce34,#ee2a7b,#6228d7);">✈️</div>
+      <p class="platform-name">Instagram — UCEAP</p>
+      <p class="platform-role">Guest Account Takeover</p>
+      <p class="platform-desc">
+        Executed an official account takeover for the UC Education Abroad Program,
+        sharing authentic, on-brand stories from the student abroad experience.
+      </p>
+      <div class="tag-row">
+        <span class="tag clay-tag">Brand Voice</span>
+        <span class="tag clay-tag">Storytelling</span>
+        <span class="tag clay-tag">Study Abroad</span>
+      </div>
+    </div>
+
+    <div class="platform-card">
+      <div class="platform-icon" style="background:#0077B5;">💼</div>
+      <p class="platform-name">LinkedIn</p>
+      <p class="platform-role">Professional Presence</p>
+      <p class="platform-desc">
+        Maintaining a professional profile reflecting my background in community organizing,
+        education abroad, and nonprofit outreach.
+      </p>
+      <div class="tag-row">
+        <span class="tag">Networking</span>
+        <span class="tag">Professional Brand</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-banner">
+    <div>
+      <h3>UCEAP Account Takeover</h3>
+      <p>
+        As a UCSB alumna and former study abroad student, I was selected to take over the official
+        UC Education Abroad Program Instagram — sharing real-time stories, tips, and cultural
+        insights that resonate with students worldwide.
+      </p>
+    </div>
+    <span class="banner-badge">Featured Work</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     EXPERIENCE
+     ============================================================ -->
+<section id="experience">
+  <p class="section-label">Work Experience</p>
+  <h2>My Background</h2>
+  <p class="section-intro">
+    A blend of community outreach, administrative coordination, and education —
+    shaped by international experience and a commitment to mission-driven work.
+  </p>
+
+  <div class="exp-grid">
+    <!-- Timeline column -->
+    <div class="exp-timeline">
+      <div class="exp-item">
+        <p class="exp-date">2023 – Present</p>
+        <p class="exp-title">Social Media & Outreach Lead</p>
+        <p class="exp-org">Community Affairs Board</p>
+        <p class="exp-desc">
+          Created and managed original content across Instagram, coordinating a content calendar,
+          designing on-brand graphics, writing copy, and monitoring engagement metrics.
+        </p>
+        <div class="tag-row">
+          <span class="tag">Instagram</span>
+          <span class="tag">Canva</span>
+          <span class="tag">Community Organizing</span>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <p class="exp-date">2022 – 2023</p>
+        <p class="exp-title">Student Ambassador / Account Takeover</p>
+        <p class="exp-org">UC Education Abroad Program (UCEAP)</p>
+        <p class="exp-desc">
+          Selected to represent UCEAP on social media through an official account takeover.
+          Continues to informally advise current UCEAP students as an alumna on visa processes,
+          travel logistics, and the study abroad experience.
+        </p>
+        <div class="tag-row">
+          <span class="tag clay-tag">Brand Storytelling</span>
+          <span class="tag clay-tag">Student Advising</span>
+          <span class="tag clay-tag">UCEAP</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin callout column -->
+    <div>
+      <div class="admin-box">
+        <p class="sub">Administrative Background</p>
+        <h3>Operations & Data Coordination</h3>
+        <ul class="admin-list">
+          <li>Managed client data systems with accuracy and confidentiality, applying strong organizational and documentation habits</li>
+          <li>Supported policy implementation within university and education-sector environments, including familiarity with FERPA and student data guidelines</li>
+          <li>Coordinated logistics for visa processes and international travel requirements — directly applicable to study abroad programming</li>
+          <li>Maintained organized records, asset libraries, and filing systems across multiple departments</li>
+          <li>Collaborated with cross-functional teams to support outreach and enrollment initiatives</li>
+          <li>Comfortable navigating university systems, CMS platforms, and database tools</li>
+        </ul>
+        <div class="tag-row" style="margin-top: 1.25rem;">
+          <span class="tag clay-tag">Data Management</span>
+          <span class="tag clay-tag">University Systems</span>
+          <span class="tag clay-tag">FERPA</span>
+          <span class="tag clay-tag">Visa & Travel</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TRAVEL
+     ============================================================ -->
+<section id="travel" class="travel-section">
+  <p class="section-label">International Experience</p>
+  <h2>Shaped by the World</h2>
+  <p class="section-intro">
+    Living and working abroad gave me an eye for cross-cultural communication —
+    and the understanding that great content is always audience-specific.
+  </p>
+
+  <div class="travel-layout">
+    <div>
+      <div class="travel-grid">
+        <!-- EDIT THESE CARDS to match your actual countries visited -->
+        <div class="country-card">
+          <div class="country-flag">🇲🇽</div>
+          <p class="country-name">Mexico</p>
+          <p class="country-note">Cultural roots & connection</p>
+        </div>
+        <div class="country-card">
+          <div class="country-flag">🌍</div>
+          <p class="country-name">Study Abroad Destination</p>
+          <p class="country-note">UCEAP program</p>
+        </div>
+        <div class="country-card">
+          <div class="country-flag">✈️</div>
+          <p class="country-name">10+ Countries</p>
+          <p class="country-note">Independent travel</p>
+        </div>
+        <div class="country-card">
+          <div class="country-flag">🗺️</div>
+          <p class="country-name">Visa Experience</p>
+          <p class="country-note">International documentation</p>
+        </div>
+      </div>
+      <blockquote class="travel-insight">
+        "Traveling across cultures taught me that the best storytelling meets people exactly where
+        they are — in their language, their context, their moment. That's the lens I bring to
+        every platform I manage."
+      </blockquote>
+    </div>
+
+    <div class="travel-highlights">
+      <!-- EDIT these numbers to match your real experience -->
+      <div class="travel-stat">
+        <span class="t-num">10+</span>
+        <div>
+          <span class="t-title">Countries Visited</span>
+          <span class="t-desc">Independent and program travel across multiple continents</span>
+        </div>
+      </div>
+      <div class="travel-stat">
+        <span class="t-num">1</span>
+        <div>
+          <span class="t-title">Study Abroad Program</span>
+          <span class="t-desc">UCEAP participant with firsthand immersive experience</span>
+        </div>
+      </div>
+      <div class="travel-stat">
+        <span class="t-num">∞</span>
+        <div>
+          <span class="t-title">Stories to Tell</span>
+          <span class="t-desc">Cross-cultural storytelling that resonates with diverse student audiences</span>
+        </div>
+      </div>
+      <div class="travel-stat">
+        <span class="t-num">2</span>
+        <div>
+          <span class="t-title">Languages</span>
+          <span class="t-desc">English & Spanish — bilingual content creation capability</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SKILLS
+     ============================================================ -->
+<section id="skills">
+  <p class="section-label">Skills & Tools</p>
+  <h2>What I Bring</h2>
+  <p class="section-intro">
+    Technical fluency meets creative instinct — built across platforms, campaigns, and communities.
+  </p>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <p class="skill-category">Content & Design</p>
+      <h3>Creative Production</h3>
+      <ul class="skill-list">
+        <li>Graphic design (Canva, Adobe Suite)</li>
+        <li>Short-form video & Reels editing</li>
+        <li>Photography & image handling</li>
+        <li>Copywriting & caption strategy</li>
+        <li>Content calendars & scheduling tools</li>
+        <li>Accessibility-compliant content</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <p class="skill-category">Strategy & Analytics</p>
+      <h3>Campaign Management</h3>
+      <ul class="skill-list">
+        <li>Platform-specific best practices</li>
+        <li>Engagement & reach analytics</li>
+        <li>Audience targeting & KPIs</li>
+        <li>Brand voice & messaging consistency</li>
+        <li>Community reputation management</li>
+        <li>FERPA & copyright compliance</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <p class="skill-category">Operations & Coordination</p>
+      <h3>Administrative Expertise</h3>
+      <ul class="skill-list">
+        <li>Client data management & CRM systems</li>
+        <li>University policy implementation</li>
+        <li>Visa & international travel logistics</li>
+        <li>Cross-functional team collaboration</li>
+        <li>Organized asset & documentation libraries</li>
+        <li>Bilingual communication (EN/ES)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<section id="contact" class="contact-section">
+  <p class="section-label">Let's Connect</p>
+  <h2>Open to Opportunities</h2>
+  <p class="section-intro">
+    I'm actively looking for remote roles in nonprofit community organizing and education outreach —
+    particularly in social media coordination and student-facing communications.
+  </p>
+  <div class="contact-links">
+    <!-- REPLACE with your actual links -->
+    <a class="contact-link" href="mailto:your@email.com">Email Me</a>
+    <a class="contact-link" href="https://linkedin.com/in/yourhandle" target="_blank">LinkedIn</a>
+    <a class="contact-link" href="https://instagram.com/yourhandle" target="_blank">Instagram</a>
+    <a class="contact-link" href="resume.pdf" target="_blank">Download Resume</a>
+  </div>
+</section>
+
+<footer>
+  © 2026 Olivia Alejandra Garcia · Built to grow with me
+</footer>
+
+<!-- ============================================================
+     GALLERY FILTER SCRIPT
+     ============================================================ -->
+<script>
+function filterGallery(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.style.display = (cat === 'all' || item.dataset.cat === cat) ? 'flex' : 'none';
+  });
+}
+</script>
+
+</body>
+</html>
