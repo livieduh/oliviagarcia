@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olivia Alejandra Garcia — Social Media & Community Outreach</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange:#F09300; --orange-light:#FDE8B8;
+  --pink-light:#FD6484; --pink:#FD3866;
+  --teal:#078E92; --teal-mid:#187187;
+  --teal-dark:#065867; --teal-ink:#00343A;
+  --white:#FFFDF8;
+  --font-display:'Fraunces',Georgia,serif;
+  --font-body:'DM Sans',system-ui,sans-serif;
+  --radius-card:20px; --radius-pill:50px;
+  --border:2px solid #00343A;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);background:var(--white);color:var(--teal-ink);line-height:1.7;font-size:16px;}
+
+nav{background:var(--white);border-bottom:var(--border);padding:0 2.5rem;display:flex;justify-content:space-between;align-items:center;height:68px;position:sticky;top:0;z-index:100;}
+.nav-logo{font-family:var(--font-display);font-size:1.4rem;font-weight:900;color:var(--teal);font-style:italic;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-size:0.8rem;font-weight:500;color:var(--teal-ink);text-decoration:none;letter-spacing:0.05em;text-transform:uppercase;border-bottom:2px solid transparent;padding-bottom:2px;transition:border-color 0.2s;}
+.nav-links a:hover{border-bottom-color:var(--orange);}
+
+.hero{min-height:90vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:4rem 2.5rem;gap:3rem;position:relative;overflow:hidden;background:var(--white);}
+.hero-blob{position:absolute;top:-5%;right:-5%;width:54%;height:115%;background:var(--orange-light);border-radius:55% 0 0 50%;z-index:0;border-left:2px solid var(--orange);}
+.hero-text{position:relative;z-index:1;}
+.hero-tag{display:inline-block;background:var(--teal);color:white;font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 1.1rem;border-radius:var(--radius-pill);margin-bottom:1.2rem;border:var(--border);}
+h1{font-family:var(--font-display);font-size:clamp(3rem,6vw,5rem);font-weight:900;line-height:1.0;color:var(--teal-ink);margin-bottom:1.5rem;}
+h1 .accent{color:var(--pink);font-style:italic;position:relative;display:inline-block;}
+h1 .accent::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:3px;background:var(--orange);border-radius:2px;}
+.hero-desc{font-size:1.05rem;color:var(--teal-dark);max-width:440px;margin-bottom:2.5rem;line-height:1.8;}
+.cta-row{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-main{background:var(--pink);color:white;padding:0.85rem 2.2rem;border-radius:var(--radius-pill);font-size:0.9rem;font-weight:500;text-decoration:none;border:var(--border);transition:all 0.2s;display:inline-block;font-family:var(--font-body);}
+.btn-main:hover{background:var(--orange);color:var(--teal-ink);}
+.btn-sec{background:transparent;color:var(--teal-ink);padding:0.85rem 2.2rem;border-radius:var(--radius-pill);font-size:0.9rem;font-weight:500;text-decoration:none;border:var(--border);transition:all 0.2s;display:inline-block;font-family:var(--font-body);}
+.btn-sec:hover{background:var(--teal);color:white;border-color:var(--teal);}
+.hero-visual{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.5rem;}
+.avatar-blob{width:300px;height:340px;background:var(--teal);border-radius:60% 40% 55% 45% / 50% 55% 45% 50%;display:flex;align-items:center;justify-content:center;border:var(--border);position:relative;}
+.avatar-text{font-family:var(--font-display);font-size:4.5rem;font-weight:900;color:white;font-style:italic;opacity:0.35;}
+.floating-tag{position:absolute;border:var(--border);border-radius:var(--radius-pill);padding:0.4rem 1rem;font-size:0.74rem;font-weight:500;white-space:nowrap;}
+.floating-tag.t1{bottom:-10px;left:-20px;background:var(--orange);color:var(--teal-ink);}
+.floating-tag.t2{top:20px;right:-30px;background:var(--pink-light);color:white;}
+.stat-row{display:flex;gap:0.85rem;flex-wrap:wrap;justify-content:center;}
+.stat-box{background:white;border:var(--border);border-radius:14px;padding:0.85rem 1rem;text-align:center;min-width:82px;}
+.stat-box .n{font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--pink);display:block;line-height:1;}
+.stat-box .l{font-size:0.66rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--teal-dark);display:block;margin-top:3px;}
+
+.marquee-strip{background:var(--pink);border-top:var(--border);border-bottom:var(--border);padding:0.75rem 0;overflow:hidden;white-space:nowrap;}
+.marquee-inner{display:inline-block;animation:scroll 22s linear infinite;}
+.marquee-inner span{font-family:var(--font-display);font-size:1rem;font-weight:700;font-style:italic;color:white;margin:0 2rem;}
+.marquee-inner span.dot{color:var(--orange);margin:0 0.5rem;}
+@keyframes scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+section{padding:5rem 2.5rem;}
+.section-kicker{font-size:0.72rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem;}
+.section-kicker::before{content:'';width:20px;height:2px;background:var(--teal);display:inline-block;}
+h2{font-family:var(--font-display);font-size:clamp(2.2rem,4vw,3.2rem);font-weight:900;line-height:1.1;color:var(--teal-ink);margin-bottom:1rem;}
+h2 em{font-style:italic;color:var(--pink);}
+.section-sub{font-size:1rem;color:var(--teal-dark);max-width:580px;margin-bottom:3rem;line-height:1.8;}
+.tag-row{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.75rem;}
+.tag{border-radius:var(--radius-pill);padding:0.2rem 0.75rem;font-size:0.72rem;font-weight:500;}
+.tag.teal{background:#E0F4F4;color:var(--teal-dark);}
+.tag.pink{background:#FFE8EE;color:#A0003A;}
+.tag.orange{background:var(--orange-light);color:#7A4A00;}
+
+.gallery-section{background:var(--teal-ink);}
+.gallery-section .section-kicker{color:var(--pink-light);}
+.gallery-section .section-kicker::before{background:var(--pink-light);}
+.gallery-section h2{color:white;}
+.gallery-section h2 em{color:var(--orange);}
+.gallery-section .section-sub{color:rgba(255,255,255,0.65);}
+.gallery-filter{display:flex;gap:0.6rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+.filter-btn{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);border-radius:var(--radius-pill);padding:0.4rem 1.1rem;font-size:0.8rem;font-weight:500;cursor:pointer;transition:all 0.2s;font-family:var(--font-body);}
+.filter-btn:hover,.filter-btn.active{background:var(--pink);border-color:var(--pink);color:white;}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.gallery-item{border-radius:var(--radius-card);overflow:hidden;position:relative;cursor:pointer;aspect-ratio:4/3;transition:transform 0.2s;display:flex;align-items:center;justify-content:center;border:var(--border);}
+.gallery-item:hover{transform:scale(1.02);}
+.gallery-item.wide{grid-column:span 2;}
+.gallery-item.tall{grid-row:span 2;aspect-ratio:unset;}
+.gallery-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.5rem;color:white;}
+.gallery-placeholder .icon{font-size:2rem;margin-bottom:0.6rem;opacity:0.7;}
+.gallery-placeholder .caption{font-family:var(--font-display);font-size:0.9rem;font-weight:700;font-style:italic;opacity:0.9;line-height:1.4;}
+.gallery-placeholder .sub{font-size:0.72rem;opacity:0.5;margin-top:0.3rem;}
+.gallery-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,52,58,0.88));padding:1rem;opacity:0;transition:opacity 0.2s;}
+.gallery-item:hover .gallery-overlay{opacity:1;}
+.gallery-overlay p{color:white;font-size:0.82rem;font-weight:500;}
+.gallery-tip{color:rgba(255,255,255,0.35);font-size:0.8rem;margin-top:1.5rem;font-style:italic;}
+
+.social-section{background:#FFF5F8;}
+.platform-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;margin-bottom:2.5rem;}
+.platform-card{background:white;border:var(--border);border-radius:var(--radius-card);padding:1.75rem;transition:transform 0.2s;position:relative;overflow:hidden;}
+.platform-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;}
+.platform-card.ig::before{background:linear-gradient(90deg,var(--orange),var(--pink));}
+.platform-card.li::before{background:var(--teal);}
+.platform-card:hover{transform:translateY(-4px);}
+.p-name{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--teal-ink);margin-bottom:0.2rem;}
+.p-role{font-size:0.82rem;color:var(--teal);font-weight:500;margin-bottom:0.75rem;}
+.p-desc{font-size:0.87rem;color:var(--teal-dark);line-height:1.65;}
+.feature-banner{background:var(--teal);color:white;border-radius:var(--radius-card);border:var(--border);padding:2rem 2.5rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;}
+.feature-banner h3{font-family:var(--font-display);font-size:1.6rem;font-weight:900;margin-bottom:0.4rem;font-style:italic;}
+.feature-banner p{font-size:0.9rem;opacity:0.88;max-width:480px;line-height:1.6;}
+.feature-pill{background:var(--orange);color:var(--teal-ink);border-radius:var(--radius-pill);padding:0.4rem 1.2rem;font-size:0.78rem;font-weight:500;white-space:nowrap;flex-shrink:0;border:var(--border);}
+
+.exp-section{background:#E8F6F7;}
+.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.exp-timeline{position:relative;padding-left:2rem;}
+.exp-timeline::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:3px;background:var(--pink-light);border-radius:2px;}
+.exp-item{position:relative;margin-bottom:2.5rem;padding-left:1.5rem;}
+.exp-item::before{content:'';position:absolute;left:-2.6rem;top:6px;width:12px;height:12px;background:var(--orange);border-radius:50%;border:var(--border);}
+.exp-date{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--teal);font-weight:500;margin-bottom:0.2rem;}
+.exp-title{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--teal-ink);margin-bottom:0.1rem;}
+.exp-org{font-size:0.88rem;color:var(--pink);font-weight:500;margin-bottom:0.5rem;}
+.exp-desc{font-size:0.87rem;color:var(--teal-dark);line-height:1.7;}
+.admin-card{background:white;border:var(--border);border-radius:var(--radius-card);padding:2rem;position:relative;}
+.admin-card::after{content:'';position:absolute;bottom:-6px;right:-6px;left:6px;top:6px;background:var(--orange-light);border-radius:var(--radius-card);z-index:-1;border:var(--border);}
+.admin-card .sub{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--teal);font-weight:500;margin-bottom:0.5rem;}
+.admin-card h3{font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--teal-ink);margin-bottom:1rem;}
+.admin-list{list-style:none;display:flex;flex-direction:column;gap:0.65rem;}
+.admin-list li{font-size:0.87rem;color:var(--teal-dark);display:flex;gap:0.75rem;align-items:flex-start;line-height:1.6;}
+.admin-list li::before{content:'';width:8px;height:8px;background:var(--pink);border-radius:50%;border:var(--border);flex-shrink:0;margin-top:0.45rem;}
+
+.travel-section{background:#FFF8F0;}
+.travel-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.travel-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.75rem;}
+.country-card{background:white;border:var(--border);border-radius:14px;padding:0.9rem 1.1rem;transition:background 0.2s;}
+.country-card:hover{background:var(--orange-light);}
+.country-flag{font-size:1.6rem;margin-bottom:0.25rem;}
+.country-name{font-weight:500;font-size:0.9rem;color:var(--teal-ink);}
+.country-note{font-size:0.75rem;color:var(--teal-dark);margin-top:0.15rem;}
+.travel-quote{background:var(--teal-dark);color:white;border-radius:16px;border:var(--border);padding:1.5rem;font-family:var(--font-display);font-size:1.05rem;font-style:italic;line-height:1.65;}
+.t-stats{display:flex;flex-direction:column;gap:0.85rem;}
+.t-stat{background:white;border:var(--border);border-radius:14px;padding:1.1rem 1.4rem;display:flex;gap:1rem;align-items:center;}
+.t-stat .tn{font-family:var(--font-display);font-size:2rem;font-weight:900;color:var(--orange);min-width:52px;}
+.t-stat .tt{font-weight:500;font-size:0.9rem;color:var(--teal-ink);display:block;}
+.t-stat .td{font-size:0.82rem;color:var(--teal-dark);}
+
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem;}
+.skill-card{background:white;border:var(--border);border-radius:var(--radius-card);padding:1.75rem;}
+.skill-card:nth-child(1){background:var(--orange-light);}
+.skill-card:nth-child(2){background:#FFE8EE;}
+.skill-card:nth-child(3){background:#E0F4F4;}
+.skill-cat{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;font-weight:500;margin-bottom:0.6rem;}
+.skill-card:nth-child(1) .skill-cat{color:#7A4A00;}
+.skill-card:nth-child(2) .skill-cat{color:#A0003A;}
+.skill-card:nth-child(3) .skill-cat{color:var(--teal-dark);}
+.skill-card h3{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--teal-ink);margin-bottom:0.9rem;}
+.skill-list{list-style:none;display:flex;flex-direction:column;gap:0.45rem;}
+.skill-list li{font-size:0.85rem;color:var(--teal-dark);display:flex;align-items:center;gap:0.5rem;}
+.skill-list li::before{content:'';width:6px;height:6px;background:var(--teal-ink);border-radius:50%;flex-shrink:0;}
+
+.contact-section{background:var(--teal-ink);color:white;text-align:center;}
+.contact-section h2{color:white;}
+.contact-section h2 em{color:var(--orange);}
+.contact-section .section-kicker{color:var(--teal);justify-content:center;}
+.contact-section .section-kicker::before{background:var(--teal);}
+.contact-section .section-sub{color:rgba(255,255,255,0.7);margin:0 auto 2.5rem;}
+.contact-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;}
+.contact-link{background:transparent;border:2px solid rgba(255,255,255,0.3);color:white;border-radius:var(--radius-pill);padding:0.75rem 1.75rem;font-size:0.88rem;font-weight:500;text-decoration:none;transition:all 0.2s;font-family:var(--font-body);}
+.contact-link:hover{background:var(--pink);border-color:var(--pink);}
+footer{background:var(--teal-ink);border-top:1px solid rgba(255,255,255,0.1);text-align:center;padding:1.5rem;font-size:0.8rem;color:rgba(255,255,255,0.3);}
+
+@media(max-width:900px){
+  .exp-grid,.travel-layout{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  .gallery-item.wide{grid-column:span 1;}
+  .gallery-item.tall{grid-row:span 1;aspect-ratio:4/3;}
+}
+@media(max-width:720px){
+  .hero{grid-template-columns:1fr;padding:3rem 1.5rem;gap:2.5rem;}
+  .hero-blob{display:none;}
+  .hero-visual{order:-1;}
+  .avatar-blob{width:220px;height:260px;}
+  .avatar-text{font-size:3.5rem;}
+  nav{padding:0 1.2rem;}
+  .nav-links{display:none;}
+  section{padding:4rem 1.5rem;}
+  .gallery-grid{grid-template-columns:1fr;}
+  .travel-grid{grid-template-columns:1fr 1fr;}
+  .feature-banner{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Olivia Garcia</span>
+  <ul class="nav-links">
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#social">Social</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#travel">Travel</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-blob"></div>
+  <div class="hero-text">
+    <span class="hero-tag">Social Media & Community Outreach</span>
+    <h1>Olivia<br><span class="accent">Alejandra</span><br>Garcia</h1>
+    <p class="hero-desc">Mission-driven communicator creating content that connects communities, elevates voices, and builds awareness across platforms — with roots in international education and a passion for authentic storytelling.</p>
+    <div class="cta-row">
+      <a href="#gallery" class="btn-main">View My Work</a>
+      <a href="#contact" class="btn-sec">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="avatar-blob">
+      <!-- REPLACE WITH YOUR PHOTO:
+      <img src="olivia.jpg" alt="Olivia Alejandra Garcia" style="width:100%;height:100%;object-fit:cover;border-radius:60% 40% 55% 45% / 50% 55% 45% 50%;">
+      -->
+      <span class="avatar-text">OAG</span>
+      <span class="floating-tag t1">UCSB Alumna ✦</span>
+      <span class="floating-tag t2">Bilingual ✦</span>
+    </div>
+    <div class="stat-row">
+      <div class="stat-box"><span class="n">2+</span><span class="l">Platforms</span></div>
+      <div class="stat-box"><span class="n">10+</span><span class="l">Countries</span></div>
+      <div class="stat-box"><span class="n">★</span><span class="l">UCEAP</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>Social Media</span><span class="dot">✦</span>
+    <span>Community Outreach</span><span class="dot">✦</span>
+    <span>Content Strategy</span><span class="dot">✦</span>
+    <span>Study Abroad</span><span class="dot">✦</span>
+    <span>International Experience</span><span class="dot">✦</span>
+    <span>Bilingual Creator</span><span class="dot">✦</span>
+    <span>Campaign Management</span><span class="dot">✦</span>
+    <span>Social Media</span><span class="dot">✦</span>
+    <span>Community Outreach</span><span class="dot">✦</span>
+    <span>Content Strategy</span><span class="dot">✦</span>
+    <span>Study Abroad</span><span class="dot">✦</span>
+    <span>International Experience</span><span class="dot">✦</span>
+    <span>Bilingual Creator</span><span class="dot">✦</span>
+    <span>Campaign Management</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<section id="gallery" class="gallery-section">
+  <p class="section-kicker">Portfolio & Gallery</p>
+  <h2>My Work <em>in Action</em></h2>
+  <p class="section-sub">Content I've created, campaigns I've run, and moments I've captured — from community boards to international adventures.</p>
+  <div class="gallery-filter">
+    <button class="filter-btn active" onclick="filterGallery('all',this)">All</button>
+    <button class="filter-btn" onclick="filterGallery('social',this)">Social Media</button>
+    <button class="filter-btn" onclick="filterGallery('travel',this)">Travel</button>
+    <button class="filter-btn" onclick="filterGallery('outreach',this)">Outreach</button>
+  </div>
+  <div class="gallery-grid" id="galleryGrid">
+    <!-- To add a real photo replace the background color with:
+         style="background-image:url('photo.jpg');background-size:cover;background-position:center;" -->
+    <div class="gallery-item wide" data-cat="social" style="background:#065867;">
+      <div class="gallery-placeholder"><div class="icon">📱</div><div class="caption">UCEAP Instagram Takeover</div><div class="sub">Replace with your best takeover photo</div></div>
+      <div class="gallery-overlay"><p>UCEAP Account Takeover — behind the scenes of studying abroad</p></div>
+    </div>
+    <div class="gallery-item" data-cat="travel" style="background:#078E92;">
+      <div class="gallery-placeholder"><div class="icon">🌍</div><div class="caption">International Adventures</div><div class="sub">Replace with a favorite travel photo</div></div>
+      <div class="gallery-overlay"><p>Life abroad — cross-cultural experiences</p></div>
+    </div>
+    <div class="gallery-item" data-cat="social" style="background:#FD3866;">
+      <div class="gallery-placeholder"><div class="icon">✏️</div><div class="caption">Community Affairs Board</div><div class="sub">Replace with an Instagram post or graphic</div></div>
+      <div class="gallery-overlay"><p>CAB Instagram — original content & campaigns</p></div>
+    </div>
+    <div class="gallery-item tall" data-cat="outreach" style="background:#F09300;">
+      <div class="gallery-placeholder"><div class="icon">🤝</div><div class="caption">Community Outreach</div><div class="sub">Replace with an event or tabling photo</div></div>
+      <div class="gallery-overlay"><p>On the ground — community engagement & outreach</p></div>
+    </div>
+    <div class="gallery-item" data-cat="travel" style="background:#187187;">
+      <div class="gallery-placeholder"><div class="icon">✈️</div><div class="caption">Study Abroad Experience</div><div class="sub">Replace with a UCEAP program photo</div></div>
+      <div class="gallery-overlay"><p>UCEAP — living the study abroad life</p></div>
+    </div>
+    <div class="gallery-item" data-cat="social" style="background:#FD6484;">
+      <div class="gallery-placeholder"><div class="icon">🎨</div><div class="caption">Graphic Design Work</div><div class="sub">Replace with a Canva post or campaign asset</div></div>
+      <div class="gallery-overlay"><p>Design work — on-brand graphics for social</p></div>
+    </div>
+    <div class="gallery-item" data-cat="outreach" style="background:#065867;">
+      <div class="gallery-placeholder"><div class="icon">📣</div><div class="caption">Outreach Campaign</div><div class="sub">Replace with a flyer, event, or campaign shot</div></div>
+      <div class="gallery-overlay"><p>Campaign work — reaching audiences that matter</p></div>
+    </div>
+    <div class="gallery-item" data-cat="travel" style="background:#F09300;">
+      <div class="gallery-placeholder"><div class="icon">🗺️</div><div class="caption">Around the World</div><div class="sub">Replace with another favorite travel moment</div></div>
+      <div class="gallery-overlay"><p>Exploring cultures — the lens behind the content</p></div>
+    </div>
+  </div>
+  <p class="gallery-tip">💡 Open this file in VS Code and follow the comments above each gallery tile to add real photos.</p>
+</section>
+
+<section id="social" class="social-section">
+  <p class="section-kicker">Social Media Presence</p>
+  <h2>Platforms & <em>Campaigns</em></h2>
+  <p class="section-sub">From managing an organization's Instagram to executing an official UCEAP account takeover, I create purposeful, on-brand content tailored to audience and platform.</p>
+  <div class="platform-grid">
+    <div class="platform-card ig">
+      <p class="p-name">Instagram — CAB</p>
+      <p class="p-role">Account Manager · Community Affairs Board</p>
+      <p class="p-desc">End-to-end content creation: writing captions, designing graphics, scheduling posts, and tracking engagement to grow community awareness.</p>
+      <div class="tag-row"><span class="tag teal">Content Strategy</span><span class="tag teal">Graphic Design</span><span class="tag teal">Community Building</span></div>
+    </div>
+    <div class="platform-card ig">
+      <p class="p-name">Instagram — UCEAP</p>
+      <p class="p-role">Guest Account Takeover</p>
+      <p class="p-desc">Official account takeover for the UC Education Abroad Program, sharing authentic on-brand stories from the student abroad experience.</p>
+      <div class="tag-row"><span class="tag pink">Brand Voice</span><span class="tag pink">Storytelling</span><span class="tag pink">Study Abroad</span></div>
+    </div>
+    <div class="platform-card li">
+      <p class="p-name">LinkedIn</p>
+      <p class="p-role">Professional Presence</p>
+      <p class="p-desc">A professional profile reflecting my background in community organizing, education abroad, and nonprofit outreach.</p>
+      <div class="tag-row"><span class="tag orange">Networking</span><span class="tag orange">Professional Brand</span></div>
+    </div>
+  </div>
+  <div class="feature-banner">
+    <div>
+      <h3>UCEAP Account Takeover</h3>
+      <p>Selected as a UCSB alumna to take over the official UC Education Abroad Program Instagram — sharing real-time stories, tips, and cultural insights that resonate with students worldwide.</p>
+    </div>
+    <span class="feature-pill">Featured Work ✦</span>
+  </div>
+</section>
+
+<section id="experience" class="exp-section">
+  <p class="section-kicker">Work Experience</p>
+  <h2>My <em>Background</em></h2>
+  <p class="section-sub">A blend of community outreach, administrative coordination, and education — shaped by international experience and a commitment to mission-driven work.</p>
+  <div class="exp-grid">
+    <div class="exp-timeline">
+      <div class="exp-item">
+        <p class="exp-date">2023 – Present</p>
+        <p class="exp-title">Social Media & Outreach Lead</p>
+        <p class="exp-org">Community Affairs Board</p>
+        <p class="exp-desc">Created and managed original content across Instagram, coordinating a content calendar, designing on-brand graphics, writing copy, and monitoring engagement metrics.</p>
+        <div class="tag-row" style="margin-top:0.6rem;"><span class="tag teal">Instagram</span><span class="tag teal">Canva</span><span class="tag teal">Community Organizing</span></div>
+      </div>
+      <div class="exp-item">
+        <p class="exp-date">2022 – 2023</p>
+        <p class="exp-title">Student Ambassador / Account Takeover</p>
+        <p class="exp-org">UC Education Abroad Program (UCEAP)</p>
+        <p class="exp-desc">Selected to represent UCEAP on social media. Continues to informally advise current UCEAP students on visa processes, travel logistics, and the study abroad experience.</p>
+        <div class="tag-row" style="margin-top:0.6rem;"><span class="tag pink">Brand Storytelling</span><span class="tag pink">Student Advising</span><span class="tag pink">UCEAP</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="admin-card">
+        <p class="sub">Administrative Background</p>
+        <h3>Operations & Data Coordination</h3>
+        <ul class="admin-list">
+          <li>Managed client data systems with accuracy and confidentiality, applying strong organizational and documentation habits</li>
+          <li>Supported policy implementation within university environments, including familiarity with FERPA and student data guidelines</li>
+          <li>Coordinated logistics for visa processes and international travel requirements — directly applicable to study abroad programming</li>
+          <li>Maintained organized records, asset libraries, and filing systems across departments</li>
+          <li>Collaborated cross-functionally to support outreach and enrollment initiatives</li>
+          <li>Comfortable navigating university systems, CMS platforms, and database tools</li>
+        </ul>
+        <div class="tag-row" style="margin-top:1.1rem;"><span class="tag teal">Data Management</span><span class="tag teal">University Systems</span><span class="tag teal">FERPA</span><span class="tag teal">Visa & Travel</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="travel" class="travel-section">
+  <p class="section-kicker">International Experience</p>
+  <h2>Shaped by <em>the World</em></h2>
+  <p class="section-sub">Living and working abroad gave me an eye for cross-cultural communication — and the understanding that great content always meets its audience where they are.</p>
+  <div class="travel-layout">
+    <div>
+      <div class="travel-grid">
+        <!-- EDIT these with your actual countries -->
+        <div class="country-card"><div class="country-flag">🇲🇽</div><p class="country-name">Mexico</p><p class="country-note">Cultural roots & connection</p></div>
+        <div class="country-card"><div class="country-flag">🌍</div><p class="country-name">Study Abroad</p><p class="country-note">UCEAP program destination</p></div>
+        <div class="country-card"><div class="country-flag">✈️</div><p class="country-name">10+ Countries</p><p class="country-note">Independent travel</p></div>
+        <div class="country-card"><div class="country-flag">🗺️</div><p class="country-name">Visa Experience</p><p class="country-note">International documentation</p></div>
+      </div>
+      <blockquote class="travel-quote">"Traveling across cultures taught me that the best storytelling meets people exactly where they are — in their language, their context, their moment. That's the lens I bring to every platform I manage."</blockquote>
+    </div>
+    <div class="t-stats">
+      <div class="t-stat"><span class="tn">10+</span><div><span class="tt">Countries Visited</span><span class="td">Independent and program travel across multiple continents</span></div></div>
+      <div class="t-stat"><span class="tn">1</span><div><span class="tt">Study Abroad Program</span><span class="td">UCEAP participant with firsthand immersive experience</span></div></div>
+      <div class="t-stat"><span class="tn">2</span><div><span class="tt">Languages</span><span class="td">English & Spanish — bilingual content creation capability</span></div></div>
+      <div class="t-stat"><span class="tn">∞</span><div><span class="tt">Stories to Tell</span><span class="td">Cross-cultural storytelling for diverse student audiences</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <p class="section-kicker">Skills & Tools</p>
+  <h2>What I <em>Bring</em></h2>
+  <p class="section-sub">Technical fluency meets creative instinct — built across platforms, campaigns, and communities.</p>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <p class="skill-cat">Content & Design</p>
+      <h3>Creative Production</h3>
+      <ul class="skill-list">
+        <li>Graphic design (Canva, Adobe Suite)</li>
+        <li>Short-form video & Reels editing</li>
+        <li>Photography & image handling</li>
+        <li>Copywriting & caption strategy</li>
+        <li>Content calendars & scheduling tools</li>
+        <li>Accessibility-compliant content</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <p class="skill-cat">Strategy & Analytics</p>
+      <h3>Campaign Management</h3>
+      <ul class="skill-list">
+        <li>Platform-specific best practices</li>
+        <li>Engagement & reach analytics</li>
+        <li>Audience targeting & KPIs</li>
+        <li>Brand voice & messaging consistency</li>
+        <li>Community reputation management</li>
+        <li>FERPA & copyright compliance</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <p class="skill-cat">Operations & Coordination</p>
+      <h3>Administrative Expertise</h3>
+      <ul class="skill-list">
+        <li>Client data management & CRM systems</li>
+        <li>University policy implementation</li>
+        <li>Visa & international travel logistics</li>
+        <li>Cross-functional team collaboration</li>
+        <li>Organized asset & documentation libraries</li>
+        <li>Bilingual communication (EN/ES)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact-section">
+  <p class="section-kicker">Let's Connect</p>
+  <h2>Open to <em>Opportunities</em></h2>
+  <p class="section-sub">Looking for remote roles in nonprofit community organizing and education outreach — particularly social media coordination and student-facing communications.</p>
+  <div class="contact-links">
+    <!-- REPLACE with your real links -->
+    <a class="contact-link" href="mailto:your@email.com">Email Me</a>
+    <a class="contact-link" href="https://linkedin.com/in/yourhandle" target="_blank">LinkedIn</a>
+    <a class="contact-link" href="https://instagram.com/yourhandle" target="_blank">Instagram</a>
+    <a class="contact-link" href="resume.pdf" target="_blank">Download Resume</a>
+  </div>
+</section>
+
+<footer>© 2026 Olivia Alejandra Garcia · oliviagarciacreative.com</footer>
+
+<script>
+function filterGallery(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.style.display = (cat === 'all' || item.dataset.cat === cat) ? 'flex' : 'none';
+  });
+}
+</script>
+</body>
+</html>
