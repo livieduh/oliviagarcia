@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olivia Alejandra Garcia — Creative Marketing</title>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@300;400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     DESIGN TOKENS — edit these to restyle the whole site
+     ============================================================ -->
+<style>
+:root {
+  /* --- PALETTE (cool greens, grays, blacks) --- */
+  --olive:         #7C9458;   /* grey green — primary accent */
+  --olive-light:   #A4B896;   /* lighter grey green — hover accents */
+  --olive-pale:    #E8EEDC;   /* pale grey green — skill card bg */
+  --honey:         #6B8B5C;   /* green tone — secondary accent */
+  --honey-mid:     #5A7A4B;   /* darker green — buttons, featured tiles */
+  --honey-light:   #D4DFCA;   /* pale green — tag backgrounds */
+  --honey-pale:    #F0F5ED;   /* very pale green — section bg tints */
+  --linen:         #F5F5F3;   /* cool white-gray — BASE color */
+  --linen-light:   #FAFAF9;   /* cooler white — page background */
+  --linen-dark:    #A8A8A8;   /* cool grey — borders */
+  --espresso:      #1A1A1A;   /* black — primary text */
+  --espresso-mid:  #333333;   /* dark grey — nav, accents */
+  --espresso-soft: #4A4A4A;   /* medium grey — body text */
+  --white:         #FFFFFF;   /* clean white — card backgrounds */
+
+  /* --- TYPOGRAPHY --- */
+  --font-display: 'Big Shoulders Display', sans-serif; /* headings / brand — strong & modern */
+  --font-body:    'Big Shoulders Display', sans-serif;  /* body — geometric & aesthetic */
+  --font-ui:      'Inter', system-ui, sans-serif;        /* UI labels & pills — contemporary */
+
+  /* --- LAYOUT --- */
+  --radius-card:  16px;
+  --radius-pill:  50px;
+  --sidebar-w:    300px;
+  --nav-h:        62px;
+}
+
+/* ============================================================
+   BASE RESET
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--linen-light);
+  color: var(--espresso);
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+nav {
+  background: var(--linen);
+  border-bottom: 2px solid var(--linen-dark);
+  padding: 0 2rem;
+  display: flex; justify-content: space-between; align-items: center;
+  height: var(--nav-h);
+  position: sticky; top: 0; z-index: 200;
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.2rem; color: var(--espresso-mid);
+  letter-spacing: 0.02em;
+}
+.nav-logo span { color: var(--honey); }
+.nav-links { display: flex; gap: 1.5rem; list-style: none; }
+.nav-links a {
+  font-family: var(--font-ui);
+  font-size: 0.78rem; font-weight: 700;
+  color: var(--espresso-soft); text-decoration: none;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  border-bottom: 2px solid transparent; padding-bottom: 2px;
+  transition: all 0.2s;
+}
+.nav-links a:hover { color: var(--honey); border-bottom-color: var(--honey); }
+
+/* ============================================================
+   PAGE LAYOUT — sticky sidebar + scrolling main
+   ============================================================ */
+.page-wrap {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.sidebar {
+  background: var(--linen);
+  border-right: 2px solid var(--linen-dark);
+  padding: 2.5rem 1.75rem;
+  display: flex; flex-direction: column; gap: 2rem;
+  position: sticky; top: var(--nav-h);
+  height: calc(100vh - var(--nav-h));
+  overflow-y: auto;
+}
+
+/* Logo / avatar circle */
+.logo-circle {
+  width: 130px; height: 130px; border-radius: 50%;
+  background: var(--linen-light);
+  border: 3px solid var(--honey-mid);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto; overflow: visible; position: relative;
+}
+.logo-circle::before {
+  content: '';
+  position: absolute;
+  left: 50%; top: 110%;
+  transform: translateX(-50%);
+  width: 240px; height: 72px; border-radius: 12px;
+  background-size: contain; background-repeat: no-repeat; background-position: center;
+  background-image: url('logo-banner.png');
+  z-index: 0;
+}
+.logo-ring {
+  position: absolute; inset: 4px; border-radius: 50%;
+  border: 1px solid var(--honey-light); z-index: 3;
+}
+.logo-photo {
+  width: 130px; height: 130px; object-fit: cover; border-radius: 50%; display: block; position: relative; z-index: 2;
+  border: 4px solid var(--white);
+  box-shadow: 0 8px 20px rgba(27,31,35,0.08);
+}
+/* REPLACE the span below with your logo image:
+   <img src="logo.png" alt="OAG logo" style="width:100%;height:100%;object-fit:contain;padding:8px;"> */
+.logo-initials {
+  font-family: var(--font-body);
+  font-size: 2.8rem; font-weight: 600;
+  color: var(--honey); font-style: italic;
+  letter-spacing: -0.02em; position: relative; z-index: 1;
+}
+
+.sidebar-name {
+  font-family: var(--font-display);
+  font-size: 1.4rem; color: var(--espresso);
+  text-align: center; line-height: 1.2; letter-spacing: 0.01em;
+}
+.sidebar-sub {
+  font-family: var(--font-body);
+  font-size: 0.82rem; font-style: italic;
+  color: var(--espresso-soft); text-align: center; margin-top: 0.2rem;
+}
+.sidebar-tagline {
+  background: var(--honey-pale);
+  border: 1px solid var(--honey-light);
+  border-radius: 10px; padding: 0.65rem 0.9rem;
+  font-family: var(--font-body); font-size: 0.8rem;
+  color: var(--espresso-mid); text-align: center;
+  font-style: italic; line-height: 1.55;
+}
+.sidebar-divider { height: 1px; background: var(--linen-dark); }
+
+.sidebar-section { display: flex; flex-direction: column; gap: 0.5rem; }
+.sidebar-label {
+  font-family: var(--font-display);
+  font-size: 0.85rem; color: var(--honey); letter-spacing: 0.04em;
+  margin-bottom: 0.1rem;
+}
+.sidebar-text { font-size: 0.82rem; color: var(--espresso-soft); line-height: 1.55; }
+.sidebar-link {
+  font-size: 0.82rem; color: var(--olive);
+  text-decoration: none; font-weight: 700;
+  font-family: var(--font-ui); display: block; transition: color 0.2s;
+}
+.sidebar-link:hover { color: var(--honey); }
+
+.skill-pill {
+  display: inline-block;
+  background: white; border: 1.5px solid var(--linen-dark);
+  color: var(--espresso-soft); border-radius: var(--radius-pill);
+  padding: 0.18rem 0.7rem; font-size: 0.7rem; font-weight: 700;
+  margin: 0.2rem 0.2rem 0 0; font-family: var(--font-ui);
+}
+.sidebar-cta {
+  background: var(--honey); color: white;
+  border-radius: var(--radius-pill);
+  padding: 0.7rem 1.4rem;
+  font-family: var(--font-display); font-size: 0.95rem;
+  letter-spacing: 0.04em; text-decoration: none;
+  text-align: center; display: block;
+  transition: background 0.2s; border: 2px solid var(--honey-mid);
+}
+.sidebar-cta:hover { background: var(--honey-mid); }
+
+/* ============================================================
+   MAIN CONTENT AREA
+   ============================================================ */
+.main { background: var(--linen-light); }
+
+/* ============================================================
+   HERO BANNER
+   ============================================================ */
+.hero-banner {
+  background: var(--white);
+  border-bottom: 2px solid var(--linen);
+  padding: 4rem 3rem 3rem;
+  position: relative; overflow: hidden;
+}
+/* Decorative circles echoing your logo's circular motif */
+.hero-banner::before {
+  content: '';
+  position: absolute; top: -40px; right: -40px;
+  width: 280px; height: 280px; border-radius: 50%;
+  background: var(--honey-pale);
+  border: 2px solid var(--honey-light); z-index: 0;
+}
+.hero-banner::after {
+  content: '';
+  position: absolute; bottom: -60px; right: 60px;
+  width: 180px; height: 180px; border-radius: 50%;
+  background: var(--olive-pale); z-index: 0;
+}
+.hero-inner { position: relative; z-index: 1; }
+.hero-eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.8rem; color: var(--olive);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.hero-eyebrow::before {
+  content: ''; width: 22px; height: 2px;
+  background: var(--olive); border-radius: 2px; display: inline-block;
+}
+.hero-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  color: var(--espresso); line-height: 1.05;
+  margin-bottom: 1.25rem; letter-spacing: 0.01em;
+}
+.hero-h1 em {
+  color: var(--honey); font-style: italic;
+  font-family: var(--font-body);
+}
+.hero-desc {
+  font-family: var(--font-body);
+  font-size: 1rem; color: var(--espresso-soft);
+  max-width: 540px; line-height: 1.9; margin-bottom: 2rem;
+}
+.hero-stats { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+.hero-stat {
+  background: var(--linen-light); border: 1.5px solid var(--linen-dark);
+  border-radius: 14px; padding: 0.75rem 1.1rem;
+  min-width: 88px; text-align: center;
+}
+.hero-stat .hn {
+  font-family: var(--font-display);
+  font-size: 1.8rem; color: var(--honey);
+  line-height: 1; display: block;
+}
+.hero-stat .hl {
+  font-size: 0.65rem; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--espresso-soft);
+  display: block; margin-top: 2px; font-family: var(--font-ui);
+}
+
+/* ============================================================
+   SHARED SECTION STYLES
+   ============================================================ */
+.content-section { padding: 3.5rem 3rem; border-bottom: 1px solid var(--linen); }
+.content-section:last-child { border-bottom: none; }
+.section-kicker {
+  font-family: var(--font-display);
+  font-size: 0.78rem; color: var(--olive);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 0.4rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.section-kicker::before {
+  content: ''; width: 16px; height: 2px;
+  background: var(--olive); border-radius: 2px; display: inline-block;
+}
+h2 {
+  font-family: var(--font-display);
+  font-size: 1.9rem; color: var(--espresso);
+  margin-bottom: 0.5rem; line-height: 1.15; letter-spacing: 0.01em;
+}
+h2 em { font-style: italic; color: var(--honey); font-family: var(--font-body); font-weight: 600; }
+.section-intro {
+  font-family: var(--font-body);
+  font-size: 0.93rem; color: var(--espresso-soft);
+  margin-bottom: 2rem; line-height: 1.85; max-width: 580px;
+}
+.tag-row { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.6rem; }
+.tag { border-radius: var(--radius-pill); padding: 0.15rem 0.65rem; font-family: var(--font-ui); font-size: 0.7rem; font-weight: 700; }
+.tag.olive  { background: var(--olive-pale); color: #4A4E25; }
+.tag.honey  { background: var(--honey-pale); color: var(--espresso-mid); }
+.tag.linen  { background: var(--linen); color: var(--espresso); }
+
+/* ============================================================
+   PORTFOLIO SECTION
+   ============================================================ */
+.portfolio-filter { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.pf-btn {
+  background: white; border: 1.5px solid var(--linen-dark);
+  color: var(--espresso-soft); border-radius: var(--radius-pill);
+  padding: 0.35rem 1rem; font-family: var(--font-display);
+  font-size: 0.8rem; letter-spacing: 0.04em; cursor: pointer; transition: all 0.2s;
+}
+.pf-btn:hover, .pf-btn.active { background: var(--honey); border-color: var(--honey); color: white; }
+
+.portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.portfolio-link-wrap { margin: 1.25rem 0; display: flex; justify-content: center; }
+.portfolio-btn {
+  display: inline-block;
+  background: var(--honey); color: white;
+  padding: 1rem 2rem; border-radius: 12px;
+  font-family: var(--font-display); font-size: 1.1rem;
+  font-weight: 700; letter-spacing: 0.04em;
+  text-decoration: none; transition: all 0.2s;
+  border: 2px solid var(--honey-mid);
+}
+.portfolio-btn:hover { background: var(--honey-mid); transform: translateY(-2px); }
+.portfolio-card {
+  border-radius: var(--radius-card); overflow: hidden;
+  border: 1.5px solid var(--linen-dark); background: white;
+  transition: transform 0.2s;
+}
+.portfolio-card:hover { transform: translateY(-3px); }
+.portfolio-card.wide { grid-column: span 2; }
+
+/* TO ADD REAL IMAGES replace background color with:
+   background-image: url('your-photo.jpg'); background-size: cover; background-position: center; */
+.pc-img {
+  aspect-ratio: 16/9; display: flex;
+  align-items: center; justify-content: center;
+  position: relative; font-size: 2rem; opacity: 0.65;
+}
+.pc-badge {
+  position: absolute; top: 10px; left: 10px;
+  background: var(--honey); color: white;
+  font-family: var(--font-display); font-size: 0.65rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.2rem 0.7rem; border-radius: var(--radius-pill);
+}
+.pc-body { padding: 1rem 1.1rem; }
+.pc-title { font-family: var(--font-display); font-size: 0.95rem; color: var(--espresso); margin-bottom: 0.25rem; letter-spacing: 0.01em; }
+.pc-desc { font-family: var(--font-body); font-size: 0.78rem; color: var(--espresso-soft); line-height: 1.6; }
+
+/* ============================================================
+   EXPERIENCE SECTION
+   ============================================================ */
+.exp-bg { background: var(--white); }
+.timeline { display: flex; flex-direction: column; }
+.timeline-item {
+  display: grid; grid-template-columns: 1fr;
+  gap: 1.5rem; padding: 1.5rem 0;
+  border-bottom: 1px solid var(--linen);
+}
+.timeline-item:last-child { border-bottom: none; }
+.tl-date { font-family: var(--font-display); font-size: 0.78rem; color: var(--honey); text-transform: uppercase; letter-spacing: 0.05em; padding-top: 0.15rem; }
+.tl-title { font-family: var(--font-display); font-size: 1rem; color: var(--espresso); margin-bottom: 0.1rem; letter-spacing: 0.01em; }
+.tl-org { font-family: var(--font-body); font-size: 0.83rem; color: var(--olive); font-style: italic; margin-bottom: 0.45rem; }
+.tl-desc { font-family: var(--font-body); font-size: 0.85rem; color: var(--espresso-soft); line-height: 1.7; }
+
+.admin-box {
+  background: var(--honey-pale); border: 1.5px solid var(--linen-dark);
+  border-radius: var(--radius-card); padding: 2rem; margin-top: 2rem; position: relative;
+}
+.admin-box-label {
+  position: absolute; top: -13px; left: 1.5rem;
+  background: var(--olive); color: white;
+  font-family: var(--font-display); font-size: 0.72rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.25rem 0.9rem; border-radius: var(--radius-pill);
+}
+.admin-title { font-family: var(--font-display); font-size: 1rem; color: var(--espresso); margin-bottom: 0.75rem; letter-spacing: 0.01em; }
+.admin-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.5rem; }
+.admin-list li { font-family: var(--font-body); font-size: 0.85rem; color: var(--espresso-soft); display: flex; gap: 0.75rem; align-items: flex-start; line-height: 1.6; }
+.admin-list li::before { content: ''; width: 7px; height: 7px; background: var(--honey); border-radius: 50%; flex-shrink: 0; margin-top: 0.5rem; }
+
+/* ============================================================
+   TRAVEL SECTION
+   ============================================================ */
+.travel-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.travel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.5rem; }
+.country-card { background: white; border: 1.5px solid var(--linen-dark); border-radius: 12px; padding: 0.85rem 1rem; transition: border-color 0.2s; }
+.country-card:hover { border-color: var(--honey); }
+.cf { font-size: 1.5rem; margin-bottom: 0.2rem; }
+.cn { font-family: var(--font-display); font-size: 0.9rem; color: var(--espresso); letter-spacing: 0.01em; }
+.cno { font-family: var(--font-body); font-size: 0.75rem; color: var(--espresso-soft); margin-top: 0.1rem; }
+.travel-quote { background: var(--espresso-mid); color: var(--linen-light); border-radius: 14px; padding: 1.5rem; font-family: var(--font-body); font-style: italic; font-size: 0.95rem; line-height: 1.75; }
+
+.t-stats { display: flex; flex-direction: column; gap: 0.75rem; }
+.t-stat { background: white; border: 1.5px solid var(--linen-dark); border-radius: 12px; padding: 1rem 1.1rem; display: flex; gap: 1rem; align-items: center; }
+.t-stat .tn { font-family: var(--font-display); font-size: 2rem; color: var(--honey); min-width: 48px; line-height: 1; }
+.t-stat .tt { font-family: var(--font-display); font-size: 0.85rem; color: var(--espresso); display: block; letter-spacing: 0.01em; }
+.t-stat .td { font-family: var(--font-body); font-size: 0.75rem; color: var(--espresso-soft); }
+
+/* ============================================================
+   SKILLS SECTION
+   ============================================================ */
+.skills-section-bg { background: var(--white); }
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.skill-card { background: white; border: 1.5px solid var(--linen-dark); border-radius: var(--radius-card); padding: 1.5rem; }
+.skill-card:nth-child(1) { background: var(--olive-pale); }
+.skill-card:nth-child(2) { background: var(--honey-pale); }
+.skill-card:nth-child(3) { background: var(--linen); }
+.sc-cat { font-family: var(--font-display); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--olive); margin-bottom: 0.4rem; }
+.skill-card:nth-child(2) .sc-cat { color: var(--honey); }
+.skill-card:nth-child(3) .sc-cat { color: var(--espresso-soft); }
+.sc-title { font-family: var(--font-display); font-size: 1rem; color: var(--espresso); margin-bottom: 0.75rem; letter-spacing: 0.01em; }
+.sc-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+.sc-list li { font-family: var(--font-body); font-size: 0.82rem; color: var(--espresso-soft); display: flex; align-items: center; gap: 0.5rem; }
+.sc-list li::before { content: ''; width: 5px; height: 5px; background: var(--honey); border-radius: 50%; flex-shrink: 0; }
+
+/* ============================================================
+   CONTACT SECTION
+   ============================================================ */
+.contact-wrap { background: var(--olive); text-align: center; padding: 4rem 3rem; }
+.contact-wrap h2 { color: var(--linen-light); }
+.contact-wrap h2 em { color: var(--honey-light); font-family: var(--font-body); }
+.contact-wrap .section-kicker { color: var(--olive-pale); justify-content: center; }
+.contact-wrap .section-kicker::before { background: var(--olive-pale); }
+.contact-wrap .section-intro { color: rgba(240,234,216,0.8); margin: 0 auto 2rem; font-family: var(--font-body); }
+.contact-btns { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+.contact-btn { background: transparent; border: 1.5px solid rgba(240,234,216,0.4); color: var(--linen-light); border-radius: var(--radius-pill); padding: 0.7rem 1.6rem; font-family: var(--font-display); font-size: 0.9rem; letter-spacing: 0.04em; text-decoration: none; transition: all 0.2s; }
+.contact-btn:hover { background: var(--honey); border-color: var(--honey); color: white; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer { background: var(--olive); border-top: 1px solid rgba(255,255,255,0.1); text-align: center; padding: 1.2rem; font-family: var(--font-ui); font-size: 0.75rem; color: rgba(240,234,216,0.4); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 960px) {
+  .page-wrap { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; }
+  .portfolio-grid, .skills-grid { grid-template-columns: repeat(2, 1fr); }
+  .portfolio-card.wide { grid-column: span 1; }
+  .travel-layout { grid-template-columns: 1fr; }
+  .t-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+}
+@media (max-width: 600px) {
+  .portfolio-grid, .skills-grid, .travel-grid { grid-template-columns: 1fr; }
+  .content-section, .hero-banner { padding: 2.5rem 1.5rem; }
+  .nav-links { display: none; }
+  .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav>
+  <span class="nav-logo">Olivia <span>Garcia</span> Creative</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#travel">Travel</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrap">
+
+  <!-- ============================================================
+       SIDEBAR
+       ============================================================ -->
+  <aside class="sidebar">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:0.85rem;">
+      <div class="logo-circle">
+        <div class="logo-ring"></div>
+        <!-- Place your portrait image here. Example: avatar.jpg in the same folder -->
+        <img src="avatar.jpg" alt="Olivia Garcia" class="logo-photo">
+      </div>
+      <p class="sidebar-name">Olivia Garcia</p>
+      <p class="sidebar-sub">Program Coordination &amp; Community Engagement Professional</p>
+    </div>
+
+    <p class="sidebar-tagline">"Creating meaningful work through community, education, and storytelling."</p>
+
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">Location</p>
+      <p class="sidebar-text">Sparks, Nevada · Remote Ready</p>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">Contact</p>
+      <!-- REPLACE with your real links -->
+      <a class="sidebar-link" href="mailto:livs.partnerships@gmail.com">livs.partnerships@gmail.com</a>
+      <a class="sidebar-link" href="https://oliviagarciacreative.com" target="_blank">oliviagarciacreative.com</a>
+      <a class="sidebar-link" href="https://www.linkedin.com/in/oliviagarciaprofessional/" target="_blank">LinkedIn</a>
+      <a class="sidebar-link" href="https://instagram.com/livie_duh" target="_blank">Instagram</a>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">Education</p>
+      <p class="sidebar-text" style="font-weight:800;color:var(--espresso);">University of California, Santa Barbara</p>
+      <p class="sidebar-text">Bachelor of Arts in Political Science and International Relations</p>
+      <p class="sidebar-text">Minor in Museum Studies</p>
+      <p class="sidebar-text" style="font-weight:800;color:var(--espresso);">University of Sydney</p>
+      <p class="sidebar-text">Study Abroad in International Politics</p>
+      <p class="sidebar-text" style="font-weight:800;color:var(--espresso);">University of California, Berkeley</p>
+      <p class="sidebar-text">High school program for GED credits</p>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">Internships</p>
+      <p class="sidebar-text">Student Intern, Chicanx Latinx Student Development Office</p>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">Certifications</p>
+      <p class="sidebar-text">Student Success Mentor Training - Mentor Collective</p>
+      <p class="sidebar-text">CPR / AED / First Aid - National CPR Foundation</p>
+      <p class="sidebar-text">Teach English to Speakers of Other Languages (TEFL) - The TEFL Organization</p>
+      <p class="sidebar-text">General Education Development (GED) - Academic Talent Development Program (ATDP), UC Berkeley Summer Program</p>
+    </div>
+
+
+
+    <div class="sidebar-section">
+      <p class="sidebar-label">Core Skills</p>
+      <div>
+        <span class="skill-pill">Instagram</span>
+        <span class="skill-pill">Canva</span>
+        <span class="skill-pill">Content Strategy</span>
+        <span class="skill-pill">Video Editing</span>
+        <span class="skill-pill">Campaign Management</span>
+        <span class="skill-pill">CapCut</span>
+        <span class="skill-pill">SCRL</span>
+        <span class="skill-pill">Community Engagement</span>
+        <span class="skill-pill">Outreach Strategies</span>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main class="main">
+
+    <!-- HERO -->
+    <div id="about" class="hero-banner">
+      <div class="hero-inner">
+        <p class="hero-eyebrow">Program Coordination & Community Engagement Professional</p>
+        <h1 class="hero-h1">Hello, I’m Olivia — I create work that feels meaningful, intentional, and rooted in connection.</h1>
+        <p class="hero-desc">
+          Program Coordination & Community Engagement Professional with a passion for creating meaningful work through community, education, and storytelling. UCSB alumna.
+          Passionate about content that genuinely connects.
+        </p>
+        <div class="hero-stats">
+          <div class="hero-stat"><span class="hn">10+</span><span class="hl">Countries Visited</span></div>
+          <div class="hero-stat"><span class="hn">1</span><span class="hl">Study Abroad Program</span></div>
+          <div class="hero-stat"><span class="hn">∞</span><span class="hl">Stories to Tell</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PORTFOLIO -->
+    <div id="portfolio" class="content-section">
+      <p class="section-kicker">Marketing Portfolio</p>
+      <h2>My Work <em>in Action</em></h2>
+      <p class="section-intro">
+        Content I've created, campaigns I've run, and moments I've captured —
+        from community boards to international adventures.
+      </p>
+
+      <!-- Portfolio link to Canva -->
+      <div class="portfolio-link-wrap">
+        <a href="https://canva.link/xdj5loe63hasa3r" target="_blank" rel="noopener" class="portfolio-btn">View My Creative Portfolio →</a>
+        <a href="GarciaOliviaResume.pdf" download class="portfolio-btn">Download My Resume</a>
+      </div>
+      <!-- Portfolio tiles removed — embedded PDF is the portfolio now -->
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div id="experience" class="content-section exp-bg">
+      <p class="section-kicker">Work Experience</p>
+      <h2>My <em>Background</em></h2>
+      <p class="section-intro">
+        A blend of social media, community outreach, and administrative coordination
+        shaped by international experience and a commitment to mission-driven work.
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div>
+            <p class="tl-title">Guest Relations Lead</p>
+            <p class="tl-org">Southern California Childrens Museum - Pasadena, California</p>
+            <p class="tl-desc">Serve as primary liaison between guests, staff, and external partners, ensuring clear communication and seamless coordination across multiple stakeholders. Coordinate and oversee community programs and events, managing scheduling, resource allocation, and vendor communication to support successful execution. Utilize Google Workspace tools to streamline operations, maintain accurate records, and support data tracking and reporting. Deliver organized, engaging experiences for diverse youth and family audiences, consistently prioritizing participant needs and program outcomes.</p>
+            <div class="tag-row"><span class="tag olive">Guest Relations</span><span class="tag olive">Event Coordination</span><span class="tag olive">Community Programs</span></div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div>
+            <p class="tl-title">Visitor Services Associate</p>
+            <p class="tl-org">LACMA - Los Angeles, California</p>
+            <p class="tl-desc">Delivered professional, welcoming visitor experiences at a high-traffic public institution, engaging diverse audiences including members, donors, VIPs, and the general public. Actively promoted organizational programs and initiatives, effectively communicating information to varied audiences with clarity and enthusiasm. Upheld institutional policies and standards while fostering an informed, inclusive, and welcoming environment for all visitors. Supported daily operations through accurate recordkeeping, data entry, and clear communication across departments.</p>
+            <div class="tag-row"><span class="tag linen">Visitor Services</span><span class="tag linen">Public Engagement</span><span class="tag linen">Operations</span></div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div>
+            <p class="tl-title">English Foreign Language Teacher</p>
+            <p class="tl-org">POLY Mokdong - Seoul, Republic of Korea</p>
+            <p class="tl-desc">Taught English to students ages 4–14 while integrating culturally-based lessons on the arts, history, and societies of the Americas, Middle East, and East Asia (including Korea). Developed and facilitated interactive, object- and discussion-based lessons that promoted critical thinking, creativity, and cross-cultural awareness. Adapted curriculum for diverse learning styles and age groups, collaborating with colleagues to create supplemental educational materials such as presentations, guides, and activities. Maintained a student-centered approach that encouraged participation, inquiry, and meaningful engagement with the subject matter.</p>
+            <div class="tag-row"><span class="tag honey">Education</span><span class="tag honey">Cross-Cultural</span><span class="tag honey">Youth Engagement</span></div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div>
+            <p class="tl-title">Investment Art Specialist</p>
+            <p class="tl-org">Shazia Imran Art Gallery - Sydney, Australia</p>
+            <p class="tl-desc">Communicated the artistic and financial value of artworks to a diverse clientele, fostering understanding and appreciation while building client relationships. Played a key role in marketing initiatives, including social media campaigns and gallery events, enhancing visibility and engagement. Developed skills in clear communication, client service, and adaptability—transferable to guest-focused, fast-paced environments such as professional kitchens.</p>
+            <div class="tag-row"><span class="tag linen">Art Gallery</span><span class="tag linen">Client Relations</span><span class="tag linen">Marketing</span></div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div>
+            <p class="tl-title">Advanced through progressively responsible roles within the organization</p>
+            <p class="tl-org">Community Affairs Board - UC Santa Barbara</p>
+            <p class="tl-desc">Served as primary liaison between UC Santa Barbara and the Santa Barbara community to establish, expand, and sustain student-led volunteer programs with local service organizations and community-based initiatives. Directed a 21-member student leadership board, providing coaching, coordination, and oversight to support program execution, volunteer engagement, and youth/student leadership development. Managed a $250,000 annual budget, overseeing fund allocation to student-led initiatives and community service projects with an emphasis on accessibility, equity, and youth engagement. Led organizational response during the COVID-19 pandemic, spearheading the CARE Project initiative that distributed essential care packages (masks, sanitizer, food assistance, and hygiene supplies) to over 2,000 students in need. Coordinated and facilitated youth and student volunteer opportunities across the Santa Barbara region, engaging diverse student populations in community service, leadership development, and civic engagement. Conducted quarterly progress meetings with university advisors and stakeholders to report on program outcomes, organizational impact, and strategic direction. Authored annual impact and outcomes reports for Associated Students documenting program effectiveness, community engagement, and student leadership development. Supported hybrid and remote coordination of programming, communications, and volunteer operations, including virtual meetings, digital outreach, and online event planning during COVID-19 operations and remote program delivery.</p>
+            <div class="tag-row"><span class="tag olive">Leadership</span><span class="tag olive">Community Service</span><span class="tag olive">Budget Management</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-box">
+        <span class="admin-box-label">Operations & Admin</span>
+        <p class="admin-title">Data Coordination & University Systems</p>
+        <ul class="admin-list">
+          <li>Managed client data systems with accuracy and confidentiality, applying strong organizational and documentation habits</li>
+          <li>Coordinated logistics for visa processes and international travel requirements — directly applicable to study abroad programming</li>
+          <li>Maintained organized records, asset libraries, and filing systems across departments</li>
+          <li>Collaborated cross-functionally to support outreach and enrollment initiatives</li>
+          <li>Comfortable navigating university systems, CMS platforms, and database tools</li>
+          <li>Proficient in AI modules, Google Workspace, Microsoft Workspace, visual media editing systems, and content management systems</li>
+        </ul>
+        <div class="tag-row" style="margin-top:1rem;">
+          <span class="tag honey">Data Management</span>
+          <span class="tag honey">University Systems</span>
+          <span class="tag honey">Visa & Travel</span>
+          <span class="tag honey">AI Tools</span>
+          <span class="tag honey">Google Workspace</span>
+          <span class="tag honey">Visual Media Editing</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRAVEL -->
+    <div id="travel" class="content-section">
+      <p class="section-kicker">International Experience</p>
+      <h2>Shaped by <em>the World</em></h2>
+      <p class="section-intro">
+        Living and working abroad gave me an eye for cross-cultural communication —
+        great content always meets its audience where they are.
+      </p>
+      <div class="travel-layout">
+        <div>
+          <div class="travel-grid">
+            <!-- EDIT these with your actual countries visited -->
+            <div class="country-card"><div class="cf">🇲🇽</div><p class="cn">Mexico</p><p class="cno">Cultural roots & connection</p></div>
+            <div class="country-card"><div class="cf">🌍</div><p class="cn">Study Abroad</p><p class="cno">UCEAP program destination</p></div>
+            <div class="country-card"><div class="cf">✈️</div><p class="cn">10+ Countries</p><p class="cno">Independent travel</p></div>
+            <div class="country-card"><div class="cf">🗺️</div><p class="cn">Visa Experience</p><p class="cno">International documentation</p></div>
+          </div>
+          <blockquote class="travel-quote">
+            "Traveling across cultures taught me that the best storytelling meets people
+            exactly where they are — in their language, their context, their moment.
+            That's the lens I bring to every platform I manage."
+          </blockquote>
+        </div>
+        <div class="t-stats">
+          <div class="t-stat"><span class="tn">10+</span><div><span class="tt">Countries Visited</span><span class="td">Multiple continents, independent & program travel</span></div></div>
+          <div class="t-stat"><span class="tn">1</span><div><span class="tt">Study Abroad Program</span><span class="td">UCEAP firsthand immersive experience</span></div></div>
+          <div class="t-stat"><span class="tn">2</span><div><span class="tt">International Roles</span><span class="td">English as a Foreign Language Teacher & Investment Art Gallerist</span></div></div>
+          <div class="t-stat"><span class="tn">∞</span><div><span class="tt">Stories to Tell</span><span class="td">Cross-cultural storytelling for diverse audiences</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="content-section skills-section-bg">
+      <p class="section-kicker">Skills & Tools</p>
+      <h2>What I <em>Bring</em></h2>
+      <p class="section-intro">
+        Technical fluency meets creative instinct — built across platforms, campaigns, and communities.
+      </p>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <p class="sc-cat">Content & Design</p>
+          <p class="sc-title">Creative Production</p>
+          <ul class="sc-list">
+            <li>Graphic design (Canva, Adobe Suite)</li>
+            <li>Short-form video & Reels editing</li>
+            <li>Photography & image handling</li>
+            <li>Copywriting & caption strategy</li>
+            <li>Content calendars & scheduling tools</li>
+            <li>Accessibility-compliant content</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <p class="sc-cat">Strategy & Analytics</p>
+          <p class="sc-title">Campaign Management</p>
+          <ul class="sc-list">
+            <li>Platform-specific best practices</li>
+            <li>Engagement & reach analytics</li>
+            <li>Audience targeting & KPIs</li>
+            <li>Brand voice & messaging consistency</li>
+            <li>Community reputation management</li>
+            <li>FERPA & copyright compliance</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <p class="sc-cat">Operations</p>
+          <p class="sc-title">Admin Expertise</p>
+          <ul class="sc-list">
+            <li>Client data management & CRM systems</li>
+            <li>University policy implementation</li>
+            <li>Visa & international travel logistics</li>
+            <li>Cross-functional team collaboration</li>
+            <li>Organized asset & documentation libraries</li>
+            <li>Bilingual communication (EN/ES)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div id="contact" class="contact-wrap">
+      <p class="section-kicker">Let's Connect</p>
+      <h2>Open to <em>Opportunities</em></h2>
+      <p class="section-intro">
+        Looking for remote roles in nonprofit community organizing and education outreach —
+        social media coordination and student-facing communications.
+      </p>
+      <div class="contact-btns">
+        <!-- REPLACE with your real links -->
+        <a class="contact-btn" href="mailto:livs.partnerships@gmail.com">Email Me</a>
+        <a class="contact-btn" href="https://www.linkedin.com/in/oliviagarciaprofessional/" target="_blank">LinkedIn</a>
+        <a class="contact-btn" href="https://instagram.com/livie_duh" target="_blank">Instagram</a>
+      </div>
+    </div>
+
+    <footer>© 2026 Olivia Alejandra Garcia · <a href="https://oliviagarciacreative.com" target="_blank" rel="noopener">oliviagarciacreative.com</a> · <a href="https://www.linkedin.com/in/oliviagarciaprofessional/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://instagram.com/livie_duh" target="_blank" rel="noopener">@livie_duh</a></footer>
+  </main>
+</div>
+
+<!-- ============================================================
+     PORTFOLIO FILTER SCRIPT
+     ============================================================ -->
+<!-- portfolio filtering removed — PDF replaces the grid -->
+
+</body>
+</html>
